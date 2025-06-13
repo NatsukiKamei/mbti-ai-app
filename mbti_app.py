@@ -1,4 +1,12 @@
 import streamlit as st
+import os
+
+# アップロード画像をMBTIと紐付けて管理（ローカル or cloudディレクトリ構成に応じて調整）
+mbti_images = {
+    "ENTP": "https://github.com/NatsukiKamei/mbti-ai-app/blob/main/ENTP.png?raw=true",
+    # 他も追加していってね
+}
+
 
 # カスタムCSSでエモい水色カードスタイル
 st.markdown("""
@@ -45,9 +53,15 @@ mbti_ai_advice = {
     "ISTP": {"一言": "技術屋×クールガール", "おすすめAI": "ツール開発・ハンズオンAI", "活用スタイル": "何かを“いじる”作業と相性良し", "特徴": "とりあえず試して動かす派"}
 }
 
-# 表示（カード形式）
+# 表示部分（画像とカードのセット）
 if mbti_type in mbti_ai_advice:
     r = mbti_ai_advice[mbti_type]
+    
+    # 🌈 画像表示
+    if mbti_type in mbti_images:
+        st.image(mbti_images[mbti_type], caption=f"{mbti_type} イメージ", use_column_width=True)
+
+    # 💬 カード表示
     st.markdown(f"""
     <div class="card">
         <h2>{mbti_type} タイプ ✨</h2>
