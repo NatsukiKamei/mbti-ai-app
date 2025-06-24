@@ -27,10 +27,10 @@ body {
 
 # MBTI選択
 mbti_type = st.selectbox("あなたのMBTIは？", [
-    'ENFJ', 'ENFP', 'ENTJ', 'ENTP',
-    'INFJ', 'INFP', 'INTJ', 'INTP',
-    'ESFJ', 'ESFP', 'ESTJ', 'ESTP',
-    'ISFJ', 'ISFP', 'ISTJ', 'ISTP'
+    'ENFJ(主人公)', 'ENFP(運動家)', 'ENTJ(指揮官)', 'ENTP(討論者)',
+    'INFJ(提唱者)', 'INFP(仲介者)', 'INTJ(建築家)', 'INTP(論理学者)',
+    'ESFJ(領事)', 'ESFP(エンターテイナー)', 'ESTJ(幹部)', 'ESTP(起業家)',
+    'ISFJ(擁護者)', 'ISFP(冒険家)', 'ISTJ(ロジスティシャン)', 'ISTP(巨匠)'
 ])
 
 # MBTIごとのアドバイス辞書
