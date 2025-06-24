@@ -4,6 +4,7 @@ import os
 # ✅ MBTI画像リンク（必要に応じて追加）
 mbti_images = {
     "ENTP": "https://github.com/NatsukiKamei/mbti-ai-app/blob/main/ENTP.png?raw=true",
+    "ESTP": "https://github.com/NatsukiKamei/mbti-ai-app/blob/main/ESTP.png?raw=true",
     "INFP": "https://github.com/NatsukiKamei/mbti-ai-app/blob/main/INFP.png?raw=true",
     # 他のMBTI画像も同様に追加可
 }
