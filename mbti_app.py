@@ -56,7 +56,6 @@ recommendations = {
     'ESFP': 'タレント系、接客、クリエイティブ現場など、感覚的なパフォーマンス職',
 }
 
-mbti_code = mbti_type[:4]  # 'ENFP(運動家)' → 'ENFP'
 
 
     # 🧭 人員配置レコメンドも表示
