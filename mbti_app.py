@@ -74,7 +74,7 @@ recommendations = {
 
 # ✅ 画像の表示（あれば）
 if mbti_type[:4] in mbti_images:
-    st.image(mbti_images[mbti_type[:4]], caption=f"{mbti_type} イメージ", use_container_width=True)
+    st.image(mbti_images[mbti_type[:4]], use_container_width=True)
 
 # ✅ MBTI性格とAI活用スタイルの表示
 if mbti_type[:4] in mbti_ai_advice:
