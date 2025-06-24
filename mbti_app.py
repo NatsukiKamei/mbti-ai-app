@@ -12,16 +12,17 @@ mbti_images = {
 # ✅ カスタムCSS（水色背景＋カード）
 st.markdown("""
 <style>
+body {
+    background: linear-gradient(to bottom, #b3d9ea, #e0f7fa); /* ブルー系グラデ */
+    color: #4A4A4A;
+}
 .card {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     padding: 1.5rem;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     margin: 2rem 0;
     font-family: 'Helvetica Neue', sans-serif;
-}
-body {
-    background: linear-gradient(to bottom, #cceeff, #e0f7fa);
 }
 </style>
 """, unsafe_allow_html=True)
