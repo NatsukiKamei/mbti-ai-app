@@ -127,3 +127,16 @@ if mbti_type != '--- 選択してください ---':
             }])
             df.to_csv("feedback_log.csv", mode="a", header=not os.path.exists("feedback_log.csv"), index=False)
 
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Google Sheets API設定
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+creds = ServiceAccountCredentials.from_json_keyfile_name("service_account.json", scope)
+client = gspread.authorize(creds)
+
+# スプレッドシートを開く
+sheet = client.open_by_key("1WQGUcuUBfsdAh6LsNasgOKWPccZ1KpA5qxtsWE4JK3g").sheet1
+
+# 例：フィードバックの追加
+sheet.append_row(["ENFP", "めちゃ当たってた！", "👍 いいね！"])
