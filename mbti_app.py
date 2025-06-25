@@ -107,3 +107,31 @@ if mbti_type != '--- 選択してください ---':
             <p>{recommend}</p>
         </div>
         """, unsafe_allow_html=True)
+
+
+# ✅ フィードバック UI（下のほうに追記）
+
+with st.form("feedback_form"):
+    st.markdown("### 💬 フィードバックをお聞かせください")
+    feedback_text = st.text_area("アプリを使ってみてどうだった？", placeholder="使いやすさ、改善点などご自由に！")
+    liked = st.radio("おすすめ度", ["👍 いいね！", "🤔 まあまあ", "😅 改善希望"])
+    submitted = st.form_submit_button("送信する")
+
+    if submitted:
+        st.success("フィードバックありがとうございます！🙏")
+        # 保存処理（例：CSVに書き出すなど）をここに書くこともできるよ
+
+
+import pandas as pd
+from datetime import datetime
+
+if submitted:
+    st.success("フィードバックありがとうございます！🙏")
+    df = pd.DataFrame([{
+        "timestamp": datetime.now().isoformat(),
+        "mbti_type": mbti_type,
+        "feedback": feedback_text,
+        "liked": liked
+    }])
+    df.to_csv("feedback_log.csv", mode="a", header=not os.path.exists("feedback_log.csv"), index=False)
+
