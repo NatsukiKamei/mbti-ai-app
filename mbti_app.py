@@ -27,7 +27,7 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
-# ✅ MBTIタイプ選択（最初は未選択にする）
+# ✅ MBTIタイプ選択（デフォルトに注意！）
 mbti_type = st.selectbox("あなたのMBTIは？", [
     '--- 選択してください ---',
     'ENFJ(主人公)', 'ENFP(運動家)', 'ENTJ(指揮官)', 'ENTP(討論者)',
@@ -35,6 +35,10 @@ mbti_type = st.selectbox("あなたのMBTIは？", [
     'ESFJ(領事)', 'ESFP(エンターテイナー)', 'ESTJ(幹部)', 'ESTP(起業家)',
     'ISFJ(擁護者)', 'ISFP(冒険家)', 'ISTJ(ロジスティシャン)', 'ISTP(巨匠)'
 ])
+
+# ✅ 「---」以外が選ばれたら処理
+if mbti_type != '--- 選択してください ---':
+    mbti_key = mbti_type[:4]
 
 # ✅ MBTIアドバイス辞書
 mbti_ai_advice = {
@@ -76,17 +80,11 @@ recommendations = {
     'ESFP': 'タレント系、接客、クリエイティブ現場など、感覚的なパフォーマンス職',
 }
 
-# ✅ 画像の表示（あれば）
-if mbti_type[:4] in mbti_images:
-    st.image(mbti_images[mbti_type[:4]], use_container_width=True)
-
-# ✅ 未選択でなければ表示（= ダミー選択肢以外なら）
-if mbti_type != '--- 選択してください ---':
-    mbti_key = mbti_type[:4]
-
+ # ✅ 画像表示
     if mbti_key in mbti_images:
         st.image(mbti_images[mbti_key], use_container_width=True)
 
+    # ✅ カード①：MBTI × AI活用
     if mbti_key in mbti_ai_advice:
         info = mbti_ai_advice[mbti_key]
         st.markdown(f"""
@@ -99,36 +97,23 @@ if mbti_type != '--- 選択してください ---':
         </div>
         """, unsafe_allow_html=True)
 
+    # ✅ カード②：人員配置
     if mbti_key in recommendations:
-        recommend = recommendations[mbti_key]
         st.markdown(f"""
         <div class="card">
             <h3>🧭 あなたに向いている人員配置</h3>
-            <p>{recommend}</p>
+            <p>{recommendations[mbti_key]}</p>
         </div>
         """, unsafe_allow_html=True)
 
-
-# ✅ MBTIタイプが選ばれたらフィードバックフォームを表示
-if mbti_type:
+    # ✅ フィードバックフォーム表示
     st.markdown("---")
     st.markdown("### 💬 フィードバックをお聞かせください")
 
     with st.form("feedback_form"):
-        feedback_text = st.text_area("アプリを使ってみてどうだった？", placeholder="例：MBTI診断が思ったより当たってた！")
+        feedback_text = st.text_area("アプリを使ってみてどうだった？", placeholder="例：当たりすぎてびっくりした！")
         liked = st.radio("おすすめ度", ["👍 いいね！", "🤔 まあまあ", "😅 改善希望"])
         submitted = st.form_submit_button("送信する")
 
         if submitted:
             st.success("フィードバックありがとうございます！🙏")
-
-           
-            import pandas as pd
-            from datetime import datetime
-            df = pd.DataFrame([{
-                 "timestamp": datetime.now().isoformat(),
-                 "mbti": mbti_type,
-                 "feedback": feedback_text,
-                 "rating": liked
-             }])
-            df.to_csv("feedback_log.csv", mode="a", header=not os.path.exists("feedback_log.csv"), index=False)
