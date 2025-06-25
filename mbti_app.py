@@ -34,7 +34,7 @@ mbti_type = st.selectbox("あなたのMBTIは？", [
     'INFJ(提唱者)', 'INFP(仲介者)', 'INTJ(建築家)', 'INTP(論理学者)',
     'ESFJ(領事)', 'ESFP(エンターテイナー)', 'ESTJ(幹部)', 'ESTP(起業家)',
     'ISFJ(擁護者)', 'ISFP(冒険家)', 'ISTJ(ロジスティシャン)', 'ISTP(巨匠)'
-]))
+])
 
 # ✅ MBTIアドバイス辞書
 mbti_ai_advice = {
