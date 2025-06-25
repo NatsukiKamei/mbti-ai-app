@@ -131,4 +131,4 @@ if mbti_type:
                  "feedback": feedback_text,
                  "rating": liked
              }])
-             df.to_csv("feedback_log.csv", mode="a", header=not os.path.exists("feedback_log.csv"), index=False)
+            df.to_csv("feedback_log.csv", mode="a", header=not os.path.exists("feedback_log.csv"), index=False)
