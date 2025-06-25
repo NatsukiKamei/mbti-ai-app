@@ -1,5 +1,7 @@
 import streamlit as st
 import os
+import pandas as pd
+from datetime import datetime
 
 # ✅ MBTI画像リンク（必要に応じて追加）
 mbti_images = {
@@ -116,4 +118,12 @@ if mbti_type != '--- 選択してください ---':
         submitted = st.form_submit_button("送信する")
 
         if submitted:
-            st.success("フィードバックありがとうございます！🙏")
+    st.success("フィードバックありがとうございます！🙏")
+    df = pd.DataFrame([{
+        "timestamp": datetime.now().isoformat(),
+        "mbti_type": mbti_type,
+        "feedback": feedback_text,
+        "liked": liked
+    }])
+    df.to_csv("feedback_log.csv", mode="a", header=not os.path.exists("feedback_log.csv"), index=False)
+
