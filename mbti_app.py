@@ -27,13 +27,14 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
-# ✅ MBTIタイプ選択
+# ✅ MBTIタイプ選択（最初は未選択にする）
 mbti_type = st.selectbox("あなたのMBTIは？", [
+    '--- 選択してください ---',
     'ENFJ(主人公)', 'ENFP(運動家)', 'ENTJ(指揮官)', 'ENTP(討論者)',
     'INFJ(提唱者)', 'INFP(仲介者)', 'INTJ(建築家)', 'INTP(論理学者)',
     'ESFJ(領事)', 'ESFP(エンターテイナー)', 'ESTJ(幹部)', 'ESTP(起業家)',
     'ISFJ(擁護者)', 'ISFP(冒険家)', 'ISTJ(ロジスティシャン)', 'ISTP(巨匠)'
-])
+]))
 
 # ✅ MBTIアドバイス辞書
 mbti_ai_advice = {
@@ -79,25 +80,30 @@ recommendations = {
 if mbti_type[:4] in mbti_images:
     st.image(mbti_images[mbti_type[:4]], use_container_width=True)
 
-# ✅ MBTI性格とAI活用スタイルの表示
-if mbti_type[:4] in mbti_ai_advice:
-    info = mbti_ai_advice[mbti_type[:4]]
-    st.markdown(f"""
-    <div class="card">
-        <h2>{mbti_type} タイプ ✨</h2>
-        <p><b>🌟 一言でいうと:</b> {info['一言']}</p>
-        <p><b>🚀 おすすめAI:</b> {info['おすすめAI']}</p>
-        <p><b>🎯 活用スタイル:</b> {info['活用スタイル']}</p>
-        <p><b>💡 特徴:</b> {info['特徴']}</p>
-    </div>
-    """, unsafe_allow_html=True)
+# ✅ 未選択でなければ表示（= ダミー選択肢以外なら）
+if mbti_type != '--- 選択してください ---':
+    mbti_key = mbti_type[:4]
 
-# ✅ 人員配置レコメンドの表示
-recommend = recommendations.get(mbti_type[:4])
-if recommend:
-    st.markdown(f"""
-    <div class="card">
-        <h3>🧭 あなたに向いている人員配置</h3>
-        <p>{recommend}</p>
-    </div>
-    """, unsafe_allow_html=True)
+    if mbti_key in mbti_images:
+        st.image(mbti_images[mbti_key], use_container_width=True)
+
+    if mbti_key in mbti_ai_advice:
+        info = mbti_ai_advice[mbti_key]
+        st.markdown(f"""
+        <div class="card">
+            <h2>{mbti_type} タイプ ✨</h2>
+            <p><b>🌟 一言でいうと:</b> {info['一言']}</p>
+            <p><b>🚀 おすすめAI:</b> {info['おすすめAI']}</p>
+            <p><b>🎯 活用スタイル:</b> {info['活用スタイル']}</p>
+            <p><b>💡 特徴:</b> {info['特徴']}</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    if mbti_key in recommendations:
+        recommend = recommendations[mbti_key]
+        st.markdown(f"""
+        <div class="card">
+            <h3>🧭 あなたに向いている人員配置</h3>
+            <p>{recommend}</p>
+        </div>
+        """, unsafe_allow_html=True)
