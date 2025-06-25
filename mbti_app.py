@@ -36,10 +36,6 @@ mbti_type = st.selectbox("あなたのMBTIは？", [
     'ISFJ(擁護者)', 'ISFP(冒険家)', 'ISTJ(ロジスティシャン)', 'ISTP(巨匠)'
 ])
 
-# ✅ 「---」以外が選ばれたら処理
-if mbti_type != '--- 選択してください ---':
-    mbti_key = mbti_type[:4]
-
 # ✅ MBTIアドバイス辞書
 mbti_ai_advice = {
     "ENFJ": {"一言": "ひらめきリーダータイプ", "おすすめAI": "画像生成AI、アイデア拡張ツール", "活用スタイル": "企画やアイデア出しに活用、チームを鼓舞", "特徴": "流行キャッチが得意で、表現力も◎"},
@@ -80,7 +76,11 @@ recommendations = {
     'ESFP': 'タレント系、接客、クリエイティブ現場など、感覚的なパフォーマンス職',
 }
 
- # ✅ 画像表示
+# ✅ 「---」以外が選ばれたら処理
+if mbti_type != '--- 選択してください ---':
+    mbti_key = mbti_type[:4]
+
+    # ✅ 画像表示
     if mbti_key in mbti_images:
         st.image(mbti_images[mbti_key], use_container_width=True)
 
