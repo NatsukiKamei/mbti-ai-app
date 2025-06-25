@@ -122,7 +122,6 @@ if mbti_type:
         if submitted:
             st.success("フィードバックありがとうございます！🙏")
 
-             保存するならここでログ出力やCSV保存もできるよ（任意）
            
             import pandas as pd
             from datetime import datetime
